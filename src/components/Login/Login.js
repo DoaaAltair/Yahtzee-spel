@@ -40,8 +40,10 @@ function Login() {
       <div className="login-page__content">
         <aside className="login-brand">
           <h1 className="login-brand__sr-only">Yahtzee</h1>
-          <p className="login-brand__tagline">Roll. Score. Play. Together.</p>
-          <p className="login-brand__subtitle">Classic fun. Modern experience.</p>
+          <div className="login-brand__copy">
+            <p className="login-brand__tagline">Roll. Score. Play. Together.</p>
+            <p className="login-brand__subtitle">Classic fun. Modern experience.</p>
+          </div>
         </aside>
 
         <main className="login-main">

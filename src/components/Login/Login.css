@@ -127,20 +127,14 @@
 
 /*
   Desktop composition tokens
-  — Logo / dice live in the BG; HTML only places the tagline in the gap.
-  — One vertical band + one horizontal visual column (not screen-center).
+  — Gap mid measured from art: red-circle bottom ~51%, dice tops ~58% → mid ~55%.
+  — Copy block is centered on that point; text itself is text-align: center under logo.
 */
 @media (min-width: 769px) {
   .login-page {
-    /*
-      % of the left brand column (full content height), not raw vh —
-      vh inside a padded grid cell was pushing the tagline too low toward the dice.
-      ~47% sits in the breathing room between circle bottom and dice tops.
-    */
-    --login-tagline-y: 47%;
-    /* Left visual column under the baked-in logo (not the full viewport) */
-    --login-visual-inset: clamp(0.75rem, 2.5vw, 2rem);
-    --login-visual-width: min(20rem, 30vw);
+    --login-gap-mid: 57%;
+    /* Horizontal center of the baked-in red circle within the brand column */
+    --login-logo-cx: 24%;
   }
 
   .login-brand {
@@ -153,24 +147,31 @@
     pointer-events: none;
   }
 
-  .login-brand__tagline,
-  .login-brand__subtitle {
+  .login-brand__copy {
     position: absolute;
-    left: var(--login-visual-inset);
-    width: var(--login-visual-width);
-    max-width: var(--login-visual-width);
+    top: var(--login-gap-mid);
+    left: var(--login-logo-cx);
+    transform: translate(-50%, -50%);
+    width: max-content;
+    max-width: min(22rem, 92%);
     text-align: center;
     pointer-events: auto;
   }
 
+  .login-brand__tagline,
+  .login-brand__subtitle {
+    position: static;
+    width: auto;
+    max-width: none;
+    text-align: center;
+  }
+
   .login-brand__tagline {
-    top: var(--login-tagline-y);
     font-size: clamp(1.1rem, 1.45vw, 1.5rem);
   }
 
   .login-brand__subtitle {
-    top: calc(var(--login-tagline-y) + 1.85em);
-    margin-top: 0;
+    margin-top: 0.4rem;
     font-size: clamp(0.82rem, 0.95vw, 0.95rem);
   }
 
@@ -179,16 +180,16 @@
   }
 }
 
-/* Short desktop heights — keep tagline in the logo→dice gap without clipping */
+/* Short / tall desktops — keep the same structural mid, tiny optical nudge only */
 @media (min-width: 769px) and (max-height: 760px) {
   .login-page {
-    --login-tagline-y: 44%;
+    --login-gap-mid: 56%;
   }
 }
 
 @media (min-width: 769px) and (min-height: 1000px) {
   .login-page {
-    --login-tagline-y: 48%;
+    --login-gap-mid: 57.5%;
   }
 }
 
@@ -362,8 +363,7 @@
   }
 
   .login-page {
-    --login-visual-width: min(22rem, 32vw);
-    --login-visual-inset: clamp(0.5rem, 2vw, 1.75rem);
+    --login-logo-cx: 23%;
   }
 }
 
@@ -380,8 +380,7 @@
   }
 
   .login-page {
-    --login-visual-inset: clamp(1rem, 3vw, 2.5rem);
-    --login-visual-width: min(22rem, 28vw);
+    --login-logo-cx: 22%;
   }
 }
 
@@ -393,6 +392,10 @@
   .login-page__content {
     width: min(100%, 1520px);
   }
+
+  .login-page {
+    --login-logo-cx: 21%;
+  }
 }
 
 @media (min-width: 2560px) {
@@ -401,8 +404,7 @@
   }
 
   .login-page {
-    --login-visual-width: min(24rem, 26vw);
-    --login-visual-inset: clamp(1rem, 3vw, 3rem);
+    --login-logo-cx: 20%;
   }
 }
 
@@ -419,8 +421,8 @@
   }
 
   .login-page {
-    --login-visual-width: min(17rem, 36vw);
-    --login-tagline-y: 46%;
+    --login-logo-cx: 26%;
+    --login-gap-mid: 56.5%;
   }
 
   .login-card {
